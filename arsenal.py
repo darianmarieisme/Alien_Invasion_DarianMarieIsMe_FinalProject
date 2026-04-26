@@ -42,7 +42,14 @@ class Arsenal:
         '''Creates and adds a new bullet if under the limit of on screen bullets
         returns: true or false based on condition of on screen bullets'''
         if len(self.arsenal) < self.settings.bullet_amount:
-            new_bullet: Bullet = Bullet(self.game)
-            self.arsenal.add(new_bullet)
+            center = Bullet(self.game)
+            top = Bullet(self.game)
+            bottom = Bullet(self.game)
+
+            top.rect.y -= 50
+            bottom.rect.y += 50
+
+            self.arsenal.add(center, top, bottom)
             return True
+        
         return False

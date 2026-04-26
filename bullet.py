@@ -19,6 +19,8 @@ class Bullet(Sprite):
         positioning on left side of screen'''
         super().__init__()
 
+        self.game = game
+
         self.screen: AlienInvasion = game.screen
         self.settings: Settings = game.settings
 
@@ -35,7 +37,7 @@ class Bullet(Sprite):
     def update(self):
         '''Updates the bullets position as it moves across the screen towards the right'''
         self.x += self.settings.bullet_speed
-        self.rect.x += 5
+        self.rect.x = self.x
 
     def draw_bullet(self) -> None:
         '''draws the bullet on the screen'''
