@@ -19,30 +19,57 @@ class Settings:
         self.screen_h: int = 800
         self.FPS: int = 60
         self.bg_file: Path = Path.cwd() / 'Assets' / 'images' / 'Starbasesnow.png'
+        self.difficulty_scale = 1.1
+        self.scores_file = Path.cwd() / 'Assets' / 'file' / 'scores.json'
 
         # Ship
 
         self.ship_file: Path = Path.cwd() / 'Assets' / 'images' / 'ship2(no bg).png'
         self.ship_w: int = 40
         self.ship_h: int = 60
-        self.ship_speed: int = 5
-        self.starting_ship_count: int = 3
 
         # Bullet
 
         self.bullet_file: Path = Path.cwd() / 'Assets' / 'images' / 'laserBlast.png'
         self.laser_sound: Path = Path.cwd() / 'Assets' / 'sound' / 'laser.mp3'
         self.impact_sound: Path = Path.cwd() / 'Assets' / 'sound' / 'ImpactSound.mp3'
-        self.bullet_speed: float = 7
-        self.bullet_w: int = 25
-        self.bullet_h: int = 80
-        self.bullet_amount: int = 5
+
 
         # Alien
 
         self.alien_file: Path = Path.cwd() / 'Assets' / 'images' / 'enemy_4.png'
         self.alien_w: int = 40
         self.alien_h: int = 40
-        self.fleet_speed: float = 0.5
         self.fleet_direction: int = 1
-        self.fleet_drop_speed: int = 40
+
+        # Button
+
+        self.button_w = 200
+        self.button_h = 50
+        self.button_color = (0, 135, 50)
+
+        # Text
+
+        self.text_color = (255, 255, 255)
+        self.button_font_size = 48
+        self.hud_font_size = 20
+        self.font_file = Path.cwd() / 'Assets' / 'fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
+
+    def initialize_dynamic_settings(self) -> None:
+        '''This class initializes settings that will change through gameplay
+        '''
+        self.ship_speed = 5
+        self.starting_ship_count = 3
+
+        self.bullet_w = 25
+        self.bullet_h = 80
+        self.bullet_speed = 7
+        self.bullet_amount = 5
+            
+        self.fleet_speed = 2
+        self.alien_points = 50
+
+    def increase_difficulty(self) -> None:
+        self.ship_speed *= self.difficulty_scale
+        self.bullet_speed *= self.difficulty_scale
+        self.fleet_speed *= self.difficulty_scale

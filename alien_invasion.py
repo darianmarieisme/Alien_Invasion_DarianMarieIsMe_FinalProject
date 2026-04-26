@@ -24,7 +24,7 @@ class AlienInvasion:
         and sets up game objects'''
         pygame.init()
         self.settings: Settings = Settings()
-        self.game_stats: GameStats = GameStats(self.settings.starting_ship_count)
+        self.settings.initialize_dynamic_settings()
 
 
         self.screen: pygame.Surface = pygame.display.set_mode(
@@ -50,6 +50,8 @@ class AlienInvasion:
         self.ship: Ship = Ship(self, Arsenal(self))
         self.alien_fleet: AlienFleet = AlienFleet(self)
         self.alien_fleet.create_fleet()
+
+        self.play_button = Button(self, 'Play')
         self.game_active: bool = False
 
     def run_game(self) -> None:
@@ -118,7 +120,7 @@ class AlienInvasion:
         pygame.display.flip()
 
     def restart_game(self) -> None:
-       self.settings.initialize_dynamic_settings
+       self.settings.initialize_dynamic_settings()
        self.game_stats.reset_stats()
        self.HUD.update_scores()
        self._reset_level()
@@ -143,8 +145,8 @@ class AlienInvasion:
 
     def _check_button_clicked(self) -> None:
         mouse_pos = pygame.mouse.get_pos()
-        if self.play_button.check_clicked(mouse_pos):
-            self.restart_game
+        if self.play_button.check_clicked(mouse_pos) and not self.game_active:
+            self.restart_game()
 
     def _check_keyup_events(self, event) -> None:
         '''this method responds to key release events and stops ship

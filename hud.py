@@ -20,7 +20,7 @@ class HUD:
         self.boundaries = game.screen.get_rect()
         self.game_stats = game.game_stats
         self.font = pygame.font.Font(self.settings.font_file, 
-            self.settings.HUD_font_size)
+            self.settings.hud_font_size)
         self.padding = 20
         self._setup_life_image()
         self.update_scores()

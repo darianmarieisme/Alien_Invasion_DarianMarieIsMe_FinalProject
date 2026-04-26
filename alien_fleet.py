@@ -22,7 +22,6 @@ class AlienFleet:
         self.game: AlienInvasion = game
         self.settings: Settings = game.settings
         self.fleet: pygame.sprite.Group = pygame.sprite.Group()
-        self.fleet_drop_speed: float = self.settings.fleet_drop_speed
         
 
         self.create_fleet()
@@ -37,7 +36,7 @@ class AlienFleet:
 
         fleet_w, fleet_h = self.calculate_fleet_size(alien_w, screen_w, alien_h, screen_h)
 
-        x_offset: int = self.calculate_offsets(alien_w, alien_h, screen_w, fleet_w, fleet_h)
+        x_offset: int = self.calculate_offsets(screen_w)
 
 
         self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset)
