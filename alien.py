@@ -30,6 +30,7 @@ class Alien(Sprite):
         self.image = pygame.transform.rotate(self.image, -90)
 
         tint: tuple[int, int, int] = random.choice([
+            (255, 255, 0),
             (255, 100, 100),
             (100, 255, 100),
             (100, 100, 255),
