@@ -30,6 +30,7 @@ class Bullet(Sprite):
             (self.settings.bullet_h, self.settings.bullet_w)
             )
         
+
         self.rect: pygame.Rect = self.image.get_rect()
         self.rect.midleft = game.ship.rect.midright
         self.x: float = float(self.rect.x)
@@ -41,4 +42,8 @@ class Bullet(Sprite):
 
     def draw_bullet(self) -> None:
         '''draws the bullet on the screen'''
+        self.screen.blit(self.image, (self.rect.x - 2, self.rect.y))
+        self.screen.blit(self.image, (self.rect.x + 2, self.rect.y))
+
+
         self.screen.blit(self.image, self.rect)
