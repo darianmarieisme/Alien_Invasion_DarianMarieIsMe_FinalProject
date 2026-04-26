@@ -99,6 +99,9 @@ class AlienInvasion:
             self.HUD.update_level()
 
     def _check_game_status(self):
+        '''This method determines how many lives need to be deducted
+        and what will happen when zero lives are reached
+        '''
         self.game_stats.ships_left -= 1
 
         if self.game_stats.ships_left  > 0:
@@ -112,6 +115,8 @@ class AlienInvasion:
             self.alien_fleet.fleet.empty()
 
     def _reset_level(self) -> None:
+        '''This method resets the level upon completion
+        '''
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
         self.alien_fleet.create_fleet()
@@ -141,20 +146,20 @@ class AlienInvasion:
        self.HUD.update_scores()
        self._reset_level()
        self.ship._center_ship()
-       self.game_active = True
+       self.game_active: bool = True
        pygame.mouse.set_visible(False)
        self.ship._center_ship()
        self.ship.arsenal.arsenal.empty()
        self.alien_fleet.fleet.empty()
        self.alien_fleet.create_fleet()
-       self.game_over = False
+       self.game_over: bool = False
 
 
     def _check_events(self) -> None:
         '''This method handles all user input events'''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.running = False
+                self.running: bool = False
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
@@ -165,6 +170,8 @@ class AlienInvasion:
                 self._check_button_clicked()
 
     def _check_button_clicked(self) -> None:
+        '''This method checks if the mouse button is clicked
+        '''
         mouse_pos = pygame.mouse.get_pos()
         if self.play_button.check_clicked(mouse_pos) and not self.game_active:
             self.restart_game()
@@ -191,7 +198,7 @@ class AlienInvasion:
                self.laser_sound.fadeout(250)
 
         elif event.key == pygame.K_q:
-            self.running = False
+            self.running: bool = False
             pygame.quit()
             sys.exit()
 

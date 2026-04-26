@@ -29,14 +29,14 @@ class Alien(Sprite):
             )
         self.image = pygame.transform.rotate(self.image, -90)
 
-        tint = random.choice([
+        tint: tuple[int, int, int] = random.choice([
             (255, 100, 100),
             (100, 255, 100),
             (100, 100, 255),
             (255, 150, 255),
         ])
 
-        tint_surface = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
+        tint_surface: pygame.Surface = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
         tint_surface.fill((*tint, 255))
 
         self.image.blit(tint_surface, (0,0), special_flags=pygame.BLEND_RGBA_MULT)
