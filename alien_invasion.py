@@ -1,9 +1,8 @@
 '''
-Final Project: Alien Invasion (Milestone 2)
+Final Project: Alien Invasion (Milestone 3)
 Darian Marie Bruce
-04/23/2026
-The purpose of this milestone is to modify the base
-game to change the ship's orientation and movement'''
+04/26/2026
+'''
 
 import sys
 import pygame
@@ -39,6 +38,7 @@ class AlienInvasion:
             )
 
         self.running: bool  = True
+        self.game_over = False
         self.clock: pygame.time.Clock  = pygame.time.Clock()
 
         pygame.mixer.init()
@@ -54,6 +54,16 @@ class AlienInvasion:
         self.play_button = Button(self, 'Play')
         self.game_active: bool = False
 
+        self.game_over_font = pygame.font.Font(self.settings.font_file, 72)
+
+        self.game_over_image = self.game_over_font.render(
+            "GAME OVER", True, self.settings.text_color
+                )
+
+        self.game_over_rect = self.game_over_image.get_rect()
+        self.game_over_rect.center = self.screen.get_rect().center
+        self.game_over_rect.y -= 100
+
     def run_game(self) -> None:
         '''This method contains the main loop that runs the game logic'''
 
@@ -67,18 +77,15 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _check_collisions(self) -> None:
-       # check collisions for ship
         if self.ship.check_collisions(self.alien_fleet.fleet):
             self._check_game_status()
 
-            # subtract one life if possible
-       # check collisions for aliens and bottom of screen
         if self.alien_fleet.check_fleet_bottom():
             self._check_game_status()
 
         collisions = self.alien_fleet.check_collisions(self.ship.arsenal.arsenal)
 
-        #check collisions of projectiles and aliens
+
         if collisions:
             self.impact_sound.play()
             self.impact_sound.fadeout(500)
@@ -92,12 +99,17 @@ class AlienInvasion:
             self.HUD.update_level()
 
     def _check_game_status(self):
+        self.game_stats.ships_left -= 1
+
         if self.game_stats.ships_left  > 0:
-            self.game_stats.ships_left -= 1
             self._reset_level()
             sleep(0.5)
         else:
             self.game_active: bool = False
+            self.game_over = True
+            pygame.mouse.set_visible(True)
+            self.ship.arsenal.arsenal.empty()
+            self.alien_fleet.fleet.empty()
 
     def _reset_level(self) -> None:
         self.ship.arsenal.arsenal.empty()
@@ -117,9 +129,13 @@ class AlienInvasion:
             self.play_button.draw()
             pygame.mouse.set_visible(True)
 
+            if self.game_over:
+                self.screen.blit(self.game_over_image, self.game_over_rect)
+
         pygame.display.flip()
 
     def restart_game(self) -> None:
+       '''This module restarts the game when it's called'''
        self.settings.initialize_dynamic_settings()
        self.game_stats.reset_stats()
        self.HUD.update_scores()
@@ -127,6 +143,11 @@ class AlienInvasion:
        self.ship._center_ship()
        self.game_active = True
        pygame.mouse.set_visible(False)
+       self.ship._center_ship()
+       self.ship.arsenal.arsenal.empty()
+       self.alien_fleet.fleet.empty()
+       self.alien_fleet.create_fleet()
+       self.game_over = False
 
 
     def _check_events(self) -> None:

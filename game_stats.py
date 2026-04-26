@@ -24,7 +24,7 @@ class GameStats():
 
     def init_saved_scores(self) -> None:
         self.path = self.settings.scores_file
-        if self.path.exists() and self.path.stat.__sizeof__() > 50:
+        if self.path.exists() and self.path.stat().st_size > 0:
             contents = self.path.read_text()
             scores = json.loads(contents)
             self.hi_score = scores.get('hi_score', 0)
@@ -42,7 +42,7 @@ class GameStats():
         try:
             self.path.write_text(contents)
         except FileNotFoundError as e:
-            print(f"File Not Found: {e.value}")
+            print(f"File Not Found: {e}")
 
     def reset_stats(self) -> None:
         self.ships_left = self.settings.starting_ship_count

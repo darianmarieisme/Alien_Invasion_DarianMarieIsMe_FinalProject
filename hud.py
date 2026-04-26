@@ -1,7 +1,7 @@
 '''
-Final Project: Alien Invasion (Participation Activity)
+Final Project: Alien Invasion (Milestone 3)
 Darian Marie Bruce
-04/25/2026
+04/26/2026
 This module deals with the HUD of the game
 '''
 
@@ -27,9 +27,9 @@ class HUD:
         self.update_level()
 
     def _setup_life_image(self) -> None:
-        self.life_image = pygame.image.load(self.settings.ship_file)
+        self.life_image = pygame.image.load(self.settings.heart_file)
         self.life_image = pygame.transform.scale(self.life_image, (
-                self.settings.ship_w, self.settings.ship_h
+                self.settings.heart_w, self.settings.heart_h
                 ))
         self.life_rect = self.life_image.get_rect()
 
@@ -46,7 +46,7 @@ class HUD:
                 self.settings.text_color, None)
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.boundaries.right - self.padding
-        self.score_rect.top = self.max_score_rect.bottom + self.padding
+        self.score_rect.top = self.max_score_rect.bottom + (self.padding * 1.5)
 
     def _update_max_score(self) -> None:
         max_score_str = f'Max-Score: {self.game_stats.max_score:,.0f}'
@@ -70,7 +70,7 @@ class HUD:
                 self.settings.text_color, None)
         self.level_rect = self.level_image.get_rect()
         self.level_rect.left = self.padding
-        self.level_rect.top = self.life_rect.bottom + self.padding
+        self.level_rect.top = self.life_rect.bottom + (self.padding * 1.5)
 
     def _draw_lives(self) -> None:
         current_x = self.padding

@@ -28,6 +28,12 @@ class Settings:
         self.ship_w: int = 40
         self.ship_h: int = 60
 
+        # Lives
+
+        self.heart_file: Path = Path.cwd() / 'Assets' / 'images' / 'heart.png'
+        self.heart_w: int = 40
+        self.heart_h: int = 60
+
         # Bullet
 
         self.bullet_file: Path = Path.cwd() / 'Assets' / 'images' / 'laserBlast.png'
@@ -46,7 +52,7 @@ class Settings:
 
         self.button_w = 200
         self.button_h = 50
-        self.button_color = (0, 135, 50)
+        self.button_color = (255, 51, 122)
 
         # Text
 

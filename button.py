@@ -1,4 +1,8 @@
 '''
+Final Project: Alien Invasion (Milestone 3)
+Darian Marie Bruce
+04/26/2026
+this module defines the button class
 '''
 
 import pygame.font

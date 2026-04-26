@@ -1,7 +1,7 @@
 '''
-Final Project: Alien Invasion (Milestone 2)
+Final Project: Alien Invasion (Milestone 3)
 Darian Marie Bruce
-04/23/2026
+04/26/2026
 this module defines the bullet class'''
 
 import pygame
