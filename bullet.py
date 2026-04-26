@@ -44,7 +44,7 @@ class Bullet(Sprite):
         '''draws the bullet on the screen'''
 
         for i in range(1,4):
-            trail = self.image.copy()
+            trail: pygame.Surface  = self.image.copy()
             trail.set_alpha(150-i *40)
 
             self.screen.blit(trail, (self.rect.x - i * 10, self.rect.y))
