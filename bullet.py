@@ -42,6 +42,13 @@ class Bullet(Sprite):
 
     def draw_bullet(self) -> None:
         '''draws the bullet on the screen'''
+
+        for i in range(1,4):
+            trail = self.image.copy()
+            trail.set_alpha(150-i *40)
+
+            self.screen.blit(trail, (self.rect.x - i * 10, self.rect.y))
+            
         self.screen.blit(self.image, (self.rect.x - 2, self.rect.y))
         self.screen.blit(self.image, (self.rect.x + 2, self.rect.y))
 

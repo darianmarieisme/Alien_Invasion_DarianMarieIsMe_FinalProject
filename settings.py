@@ -24,7 +24,7 @@ class Settings:
 
         # Ship
 
-        self.ship_file: Path = Path.cwd() / 'Assets' / 'images' / 'ship2(no bg).png'
+        self.ship_file: Path = Path.cwd() / 'Assets' / 'images' / 'ship2.png'
         self.ship_w: int = 40
         self.ship_h: int = 60
 
@@ -36,7 +36,7 @@ class Settings:
 
         # Bullet
 
-        self.bullet_file: Path = Path.cwd() / 'Assets' / 'images' / 'laserBlast.png'
+        self.bullet_file: Path = Path.cwd() / 'Assets' / 'images' / 'laserBlastedit.png'
         self.laser_sound: Path = Path.cwd() / 'Assets' / 'sound' / 'laser.mp3'
         self.impact_sound: Path = Path.cwd() / 'Assets' / 'sound' / 'ImpactSound.mp3'
 
