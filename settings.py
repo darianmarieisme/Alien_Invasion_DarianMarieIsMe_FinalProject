@@ -50,32 +50,33 @@ class Settings:
 
         # Button
 
-        self.button_w = 200
-        self.button_h = 50
-        self.button_color = (255, 51, 122)
+        self.button_w: int = 200
+        self.button_h: int = 50
+        self.button_color: tuple[int, int, int] = (255, 51, 122)
 
         # Text
 
-        self.text_color = (255, 255, 255)
-        self.button_font_size = 48
-        self.hud_font_size = 20
-        self.font_file = Path.cwd() / 'Assets' / 'fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
+        self.text_color: tuple[int, int, int] = (255, 255, 255)
+        self.button_font_size: int = 48
+        self.hud_font_size: int = 20
+        self.font_file: Path = Path.cwd() / 'Assets' / 'fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
 
     def initialize_dynamic_settings(self) -> None:
-        '''This class initializes settings that will change through gameplay
+        '''This method initializes settings that will change through gameplay
         '''
-        self.ship_speed = 5
-        self.starting_ship_count = 3
+        self.ship_speed: int = 5
+        self.starting_ship_count: int = 3
 
-        self.bullet_w = 25
-        self.bullet_h = 80
-        self.bullet_speed = 9
-        self.bullet_amount = 15
+        self.bullet_w: int = 25
+        self.bullet_h: int = 80
+        self.bullet_speed: int = 9
+        self.bullet_amount: int = 15
             
-        self.fleet_speed = 0.7
-        self.alien_points = 50
+        self.fleet_speed: float = 0.7
+        self.alien_points: int = 50
 
     def increase_difficulty(self) -> None:
+        '''This method handles the difficulty that will change with each level increase'''
         self.ship_speed *= self.difficulty_scale
         self.bullet_speed *= self.difficulty_scale
         self.fleet_speed *= self.difficulty_scale
