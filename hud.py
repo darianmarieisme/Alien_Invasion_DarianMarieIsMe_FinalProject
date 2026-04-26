@@ -79,7 +79,36 @@ class HUD:
             self.screen.blit(self.life_image, (current_x, current_y))
             current_x += self.life_rect.width + self.padding
 
+    def _draw_panel(self, rect, padding=10) -> None:
+        panel_rect = pygame.Rect(
+            rect.left - padding,
+            rect.top - padding,
+            rect.width + padding * 2,
+            rect.height + padding * 2
+        )
+        pygame.draw.rect(self.screen, (0, 0, 0), panel_rect)
+
     def draw(self) -> None:
+        left_panel_rect = pygame.Rect(
+            self.padding, 
+            self.padding,
+            self.life_rect.width * self.game_stats.ships_left +
+            self.padding * (self.game_stats.ships_left -1),
+            self.level_rect.bottom - self.padding
+        )
+        self._draw_panel(left_panel_rect)
+
+        right_panel_rect = pygame.Rect(
+            min(self.max_score_rect.left, self.score_rect.left),
+            self.max_score_rect.top,
+            max(self.max_score_rect.width, self.score_rect.width),
+            self.score_rect.bottom - self.max_score_rect.top
+        )
+        self._draw_panel(right_panel_rect)
+
+        self._draw_panel(self.hi_score_rect)
+
+
         self.screen.blit(self.hi_score_image, self.hi_score_rect)
         self.screen.blit(self.max_score_image, self.max_score_rect)
         self.screen.blit(self.score_image, self.score_rect)
